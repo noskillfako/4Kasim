@@ -33,6 +33,13 @@ class FcmBildirimServisi {//bildirim servisi classı
     });
     FirebaseMessaging.onBackgroundMessage(fcmBackgroundHandler);//uygulama kapalı veya arkaplandayken gelecek bildirimleri işler
   }
+  Future<String?> tokenAl() async{
+    try{
+      return await _fcm.getToken();
+    }catch(_){
+      return null;
+    }
+  }
   Future<void> konuyaAboneOl(String konu) async{
     await _fcm.subscribeToTopic(konu);
   }

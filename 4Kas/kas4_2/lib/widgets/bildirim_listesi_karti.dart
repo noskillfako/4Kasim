@@ -113,7 +113,35 @@ class BildirimListesiKarti extends StatelessWidget{//widget tanımı
               shrinkWrap:true,//sonsuz kaydırma
               itemCount:bildirimler.length,//gelen bildirim sayısı
               separatorBuilder:(_,_)=>const Divider(height:1),//1 px yüksekliğinde yatay çizgi
-              itemBuilder: (context,index){},//itembuilder çağırma
+              itemBuilder: (context,index){
+                final b =bildirimler[index];
+                return ListTile(
+                  contentPadding:EdgeInsets.zero,
+                  leading:const CircleAvatar(
+                    backgroundColor: Color.fromARGB(0, 123, 239, 231),
+                    child: Icon
+                    (Icons.mark_email_unread_outlined,
+                    color:Color.fromARGB(0, 113,25, 25),
+                    size:20
+                    ),
+                  ),
+                  title:Text(
+                    b.baslik,
+                    style: const TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize:14,
+                    ),
+                  ),
+                  subtitle: Text(b.icerik),
+                  trailing:Text(
+                    '${b.tarih.hour.toString().padLeft(2,'0')}:${b.tarih.minute.toString().padLeft(2,'0')}',
+                    style: TextStyle(
+                      fontSize: 11,
+                      color: Colors.grey.shade500,
+                    ),
+                  ),
+                );
+              },//itembuilderi kapatma
             ),
         ],
       ),
