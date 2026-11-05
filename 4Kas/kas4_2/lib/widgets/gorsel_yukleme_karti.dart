@@ -98,7 +98,7 @@ class GorselYuklemeKarti extends StatelessWidget{
               LinearProgressIndicator(
                 value:yuklemeOrani ,
                 backgroundColor: Colors.grey.shade200,
-                color: const Color.fromARGB(0,8,69,3),
+                color: const Color.fromARGB(255, 8, 169, 3),
                 minHeight:6,
                 borderRadius: BorderRadius.circular(4),
               ),
@@ -135,7 +135,7 @@ class GorselYuklemeKarti extends StatelessWidget{
                 onPressed:yukleniyorMu ? null:onBulutaYukle,
               label:const Text('Buluta yükle'),
               style:FilledButton.styleFrom(
-                backgroundColor:const Color.fromARGB(0,165,94,0),
+                backgroundColor:const Color.fromARGB(255, 16, 185, 129),
               ),
               icon:const Icon(Icons.cloud_upload),
               ),

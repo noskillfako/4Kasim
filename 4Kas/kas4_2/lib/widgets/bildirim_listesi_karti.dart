@@ -6,6 +6,7 @@ class BildirimListesiKarti extends StatelessWidget{//widget tanımı
   final String? token;
   final bool konuyaAboneMi;
   final ValueChanged<bool> onAboneDegisti;
+  final VoidCallback? onTestBildirimiGonder;
 
   const BildirimListesiKarti({
     super.key,//üst sınıfa key parametresini iletir
@@ -13,6 +14,7 @@ class BildirimListesiKarti extends StatelessWidget{//widget tanımı
     required this.token,
     required this.konuyaAboneMi,
     required this.onAboneDegisti,
+    this.onTestBildirimiGonder,
   });
 
   @override
@@ -38,14 +40,14 @@ class BildirimListesiKarti extends StatelessWidget{//widget tanımı
                 child:Text('FCM Bildirim Merkezi',style:TextStyle(//text yazımı ve text özellikleri
                   fontSize: 16,
                   fontWeight: FontWeight.bold,
-                  color:Color(0xFFF172A),
+                  color:Color(0xFF0F172A),
                 ),
                 ),
                 ),
               Switch(
                 value: konuyaAboneMi,//görünüm bu değere göre belirlenir
                  onChanged: onAboneDegisti,//kullanıcı dokununca bu değişken çağırılır
-                activeColor:  const Color.fromARGB(15, 160, 40, 50),
+                activeColor:  const Color.fromARGB(255, 160, 40, 50),
                  ),
             ],
             ),
@@ -53,7 +55,7 @@ class BildirimListesiKarti extends StatelessWidget{//widget tanımı
               konuyaAboneMi ? 'Tüm sınıf yayını aktif' : 'Yayın kapalı',
               style:TextStyle(//konuyaAboneminin durumuna göre text yazımı ve renk değişim
                 fontSize:12,
-                color:konuyaAboneMi ? const Color.fromARGB(15, 24, 59, 17)
+                color:konuyaAboneMi ? const Color.fromARGB(255, 24, 159, 17)
                 :  Colors.grey.shade600, 
                 fontWeight:FontWeight.w600,
               ),
@@ -71,7 +73,7 @@ class BildirimListesiKarti extends StatelessWidget{//widget tanımı
                   const Text(//text yazımı
                   "Cihazın FCM Tokeni",
                   style: TextStyle(//text renk ve boyutu
-                    color: Color.fromARGB(255, 26, 40, 52),
+                    color: Colors.white70,
                     fontSize:11,
                   ),
                   ),
@@ -79,7 +81,7 @@ class BildirimListesiKarti extends StatelessWidget{//widget tanımı
                   SelectableText(//uzun basıp kopyalanabilen text
                     token ?? 'token alınıyor',//token null değilse tokeni nullsa token alınıyor yazar
                     style:const TextStyle(//text ayarları
-                      color: Color(0xff388888),
+                      color: Color(0xff38bdf8),
                       fontSize:11,
                       fontFamily:'monospace',
                     ),
@@ -89,12 +91,20 @@ class BildirimListesiKarti extends StatelessWidget{//widget tanımı
             ),
 
             const SizedBox(height: 8),//boşluk
+            if (onTestBildirimiGonder != null) ...[
+              OutlinedButton.icon(
+                onPressed: onTestBildirimiGonder,
+                icon: const Icon(Icons.notifications_active),
+                label: const Text('Test Bildirimi Gönder'),
+              ),
+              const SizedBox(height: 8),
+            ],
             Text(
               'Gelen Bildirimler (${bildirimler.length}):',//gelen bilidirimler ve gelen bildirim sayısı
               style: const TextStyle(//text ayarlar
                 fontWeight:FontWeight.bold,
                 fontSize:14,
-                color: Color.fromARGB(0, 5, 249, 253),
+                color: Color(0xFF0F172A),
               ),
             ),
             const SizedBox(height: 8),//boşluk
@@ -111,6 +121,7 @@ class BildirimListesiKarti extends StatelessWidget{//widget tanımı
             ) 
             : ListView.separated(
               shrinkWrap:true,//sonsuz kaydırma
+              physics: const NeverScrollableScrollPhysics(),
               itemCount:bildirimler.length,//gelen bildirim sayısı
               separatorBuilder:(_,_)=>const Divider(height:1),//1 px yüksekliğinde yatay çizgi
               itemBuilder: (context,index){
@@ -118,10 +129,10 @@ class BildirimListesiKarti extends StatelessWidget{//widget tanımı
                 return ListTile(
                   contentPadding:EdgeInsets.zero,
                   leading:const CircleAvatar(
-                    backgroundColor: Color.fromARGB(0, 123, 239, 231),
+                    backgroundColor: Color.fromARGB(255, 224, 242, 254),
                     child: Icon
                     (Icons.mark_email_unread_outlined,
-                    color:Color.fromARGB(0, 113,25, 25),
+                    color:Color.fromARGB(255, 2, 132, 199),
                     size:20
                     ),
                   ),
